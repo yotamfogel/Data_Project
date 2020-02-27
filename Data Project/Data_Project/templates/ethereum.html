@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+{% extends "layout.html" %}
+
+{% block content %}
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Ethereum Prices</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            background-color: #e6eeff;
+            padding-left: 10px;
+            overflow: hidden;
+        }
+    </style>
+
+</head>
+<body>
+
+    <h2><u>{{ title }}</u></h2>
+    <h3>{{ message }}</h3>
+    <table bgcolor="#00FF00">
+        <tr>
+            <th>Category</th>
+            <th>Explanation</th>
+        </tr>
+        <tr>
+            <td>Date</td>
+            <td>The date in which the data was obtained</td>
+        </tr>
+        <tr>
+            <td>Open</td>
+            <td>Opening price on the given day</td>
+        </tr>
+        <tr>
+            <td>High</td>
+            <td> Highest price on the given day</td>
+        </tr>
+        <tr>
+            <td>Low</td>
+            <td>Lowest price on the given day</td>
+        </tr>
+        <tr>
+            <td>Close</td>
+            <td>Closing price on the given day</td>
+        </tr>
+        <tr>
+            <td>Volume</td>
+            <td>Volume of transactions on the given day</td>
+        </tr>
+        <tr>
+            <td>Market Cap</td>
+            <td>Market capitalization in USD</td>
+        </tr>
+    </table>
+    <br />
+
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Data
+    </button>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            {{ data_table3 | safe }}
+        </div>
+    </div>
+    <br />
+    <br />
+    {% endblock %}
+</body>
+</html>
