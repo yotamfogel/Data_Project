@@ -18,7 +18,7 @@
     <Name>Data Project</Name>
     <RootNamespace>Data Project</RootNamespace>
     <SuppressEnvironmentCreationPrompt>True</SuppressEnvironmentCreationPrompt>
-    <InterpreterId>MSBuild|env5|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|env8|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,17 +44,17 @@
     <Folder Include="Data_Project\static\" />
     <Folder Include="Data_Project\static\content\" />
     <Folder Include="Data_Project\static\fonts\" />
-    <Folder Include="Data_Project\static\data\" />
+    <Folder Include="Data_Project\static\Data\" />
     <Folder Include="Data_Project\static\imgs\" />
     <Folder Include="Data_Project\models\" />
     <Folder Include="Data_Project\static\scripts\" />
     <Folder Include="Data_Project\templates\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data_Project\static\data\users.csv" />
-    <Content Include="Data_Project\static\data\bitcoin_price.csv" />
-    <Content Include="Data_Project\static\data\ethereum_price.csv" />
-    <Content Include="Data_Project\static\data\ripple_price.csv" />
+    <Content Include="Data_Project\static\Data\users.csv" />
+    <Content Include="Data_Project\static\Data\bitcoin_price.csv" />
+    <Content Include="Data_Project\static\Data\ethereum_price.csv" />
+    <Content Include="Data_Project\static\Data\ripple_price.csv" />
     <Content Include="Data_Project\static\imgs\bitcoin.jpg" />
     <Content Include="Data_Project\static\imgs\ethereum.jpg" />
     <Content Include="Data_Project\static\imgs\ripple.png" />
@@ -62,8 +62,8 @@
     <Content Include="Data_Project\templates\ethereum.html" />
     <Content Include="Data_Project\templates\bitcoin.html" />
     <Content Include="Data_Project\templates\ripple.html" />
-    <Content Include="Data_Project\templates\register.html" />
-    <Content Include="Data_Project\templates\login.html" />
+    <Content Include="Data_Project\templates\Register.html" />
+    <Content Include="Data_Project\templates\Login.html" />
     <Content Include="requirements.txt" />
     <Content Include="Data_Project\static\content\bootstrap.css" />
     <Content Include="Data_Project\static\content\bootstrap.min.css" />
@@ -97,6 +97,15 @@
       <Id>env5</Id>
       <Version>3.6</Version>
       <Description>env5 (Python 3.6 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+    <Interpreter Include="env8\">
+      <Id>env8</Id>
+      <Version>3.6</Version>
+      <Description>env8 (Python 3.6 (64-bit))</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
       <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>

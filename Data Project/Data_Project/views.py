@@ -5,7 +5,7 @@ Routes and views for the flask application.
 from datetime import datetime
 from flask import render_template
 from Data_Project import app
-#from Data_Project import create_LocalDatabaseServiceRoutines
+from Data_Project.models.LocalDatabaseRoutines import create_LocalDatabaseServiceRoutines
 
 
 from datetime import datetime
@@ -37,13 +37,8 @@ from Data_Project.models.QueryFormStructure import QueryFormStructure
 from Data_Project.models.QueryFormStructure import LoginFormStructure 
 from Data_Project.models.QueryFormStructure import UserRegistrationFormStructure 
 
-app.config['SECRET_KEY'] = '1234'
+db_Functions = create_LocalDatabaseServiceRoutines()
 
-###from DemoFormProject.Models.LocalDatabaseRoutines import IsUserExist, IsLoginGood, AddNewUser 
-
-#db_Functions = create_LocalDatabaseServiceRoutines()
-
-#a
 
 @app.route('/')
 @app.route('/home')
@@ -53,6 +48,7 @@ def home():
         'index.html',
         title='Home Page',
         year=datetime.now().year,
+
         img_ripple = '/static/imgs/ripple.png',
         img_ethereum = '/static/imgs/ethereum.jpg',
         img_bitcoin = '/static/imgs/bitcoin.jpg',
@@ -91,7 +87,7 @@ def data():
 def bitcoin():
     """Renders the about page."""
     #df = pd.read_csv(path.join(path.dirname(__file__), 'static\\data\\bitcoin_price.csv'))
-    df = pd.read_csv(path.join(path.dirname(__file__), 'static/data/bitcoin_price.csv'))
+    df = pd.read_csv(path.join(path.dirname(__file__), 'static/Data/bitcoin_price.csv'))
     raw_data_table = df.to_html(classes = 'table table-hover')
     return render_template(
         'bitcoin.html',
@@ -106,7 +102,7 @@ def bitcoin():
 def ripple():
     """Renders the about page."""
         #df = pd.read_csv(path.join(path.dirname(__file__), 'static\\data\\bitcoin_price.csv'))
-    df = pd.read_csv(path.join(path.dirname(__file__), 'static/data/ripple_price.csv'))
+    df = pd.read_csv(path.join(path.dirname(__file__), 'static/Data/ripple_price.csv'))
     raw_data_table2 = df.to_html(classes = 'table table-hover')
     return render_template(
         'ripple.html',
@@ -120,7 +116,7 @@ def ripple():
 def ethereum():
     """Renders the about page."""
         #df = pd.read_csv(path.join(path.dirname(__file__), 'static\\data\\bitcoin_price.csv'))
-    df = pd.read_csv(path.join(path.dirname(__file__), 'static/data/ethereum_price.csv'))
+    df = pd.read_csv(path.join(path.dirname(__file__), 'static/Data/ethereum_price.csv'))
     raw_data_table3 = df.to_html(classes = 'table table-hover')
     return render_template(
         'ethereum.html',
@@ -130,23 +126,47 @@ def ethereum():
         message='Ethereum Prices'
     )
 
-@app.route('/register')
-def register():
+@app.route('/register', methods=['GET', 'POST'])
+def Register():
+    form = UserRegistrationFormStructure(request.form)
+
+    if (request.method == 'POST' and form.validate()):
+        if (not db_Functions.IsUserExist(form.username.data)):
+            db_Functions.AddNewUser(form)
+            db_table = ""
+
+            flash('Thanks for registering new user - '+ form.FirstName.data + " " + form.LastName.data )
+            # Here you should put what to do (or were to go) if registration was good
+        else:
+            flash('Error: User with this Username already exist ! - '+ form.username.data)
+            form = UserRegistrationFormStructure(request.form)
+
     return render_template(
         'register.html', 
-        title='Register',
+        form=form, 
+        title='Register New User',
         year=datetime.now().year,
-        message='Sign up to the site',
+        repository_name='Pandas',
         )
 
-@app.route('/login')
-def login():
-    """Renders the contact page."""
+@app.route('/login', methods=['GET', 'POST'])
+def Login():
+    form = LoginFormStructure(request.form)
+
+    if (request.method == 'POST' and form.validate()):
+        if (db_Functions.IsLoginGood(form.username.data, form.password.data)):
+            flash('Login approved!')
+            return redirect('<were to go if login is good!')
+        else:
+            flash('Error in - Username and/or password')
+   
     return render_template(
-        'login.html',
-        title='Login',
+        'login.html', 
+        form=form, 
+        title='Login to data analysis', 
         year=datetime.now().year,
-        message='Login to the site with an existing account'
-    )
+        repository_name='Pandas',
+        )
+
 
 
