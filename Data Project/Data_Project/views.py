@@ -125,8 +125,7 @@ def ripple():
 def ethereum():
     """Renders the about page."""
         #df = pd.read_csv(path.join(path.dirname(__file__), 'static\\data\\bitcoin_price.csv'))
-    df = pd.read_csv(path.join(path.dirname(
-        ), 'static/Data/ethereum_price.csv'))
+    df = pd.read_csv(path.join(path.dirname(__file__), 'static/Data/ethereum_price.csv'))
     raw_data_table3 = df.to_html(classes = 'table table-hover')
     return render_template(
         'ethereum.html',
@@ -152,7 +151,6 @@ def register():
             form = UserRegistrationFormStructure(request.form)
 
     return render_template(
-
         'register.html', 
         form=form, 
         title='Register New User',
