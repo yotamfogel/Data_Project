@@ -7,8 +7,6 @@ from flask import render_template
 from Data_Project import app
 from Data_Project.models.LocalDatabaseRoutines import create_LocalDatabaseServiceRoutines
 
-
-from datetime import datetime
 from flask import render_template, redirect, request
 
 from flask_wtf import FlaskForm
@@ -27,6 +25,12 @@ import base64
 
 from os import path
 
+
+
+
+
+
+
 from flask   import Flask, render_template, flash, request
 from wtforms import Form, BooleanField, StringField, PasswordField, validators
 from wtforms import TextField, TextAreaField, SubmitField, SelectField, DateField
@@ -39,6 +43,12 @@ from Data_Project.models.QueryFormStructure import UserRegistrationFormStructure
 
 db_Functions = create_LocalDatabaseServiceRoutines()
 
+from os import path
+from flask_bootstrap import Bootstrap
+bootstrap = Bootstrap(app)
+
+app.config['SECRET_KEY'] = 'The first argument to the field'
+
 
 @app.route('/')
 @app.route('/home')
@@ -48,7 +58,6 @@ def home():
         'index.html',
         title='Home Page',
         year=datetime.now().year,
-
         img_ripple = '/static/imgs/ripple.png',
         img_ethereum = '/static/imgs/ethereum.jpg',
         img_bitcoin = '/static/imgs/bitcoin.jpg',
@@ -116,7 +125,8 @@ def ripple():
 def ethereum():
     """Renders the about page."""
         #df = pd.read_csv(path.join(path.dirname(__file__), 'static\\data\\bitcoin_price.csv'))
-    df = pd.read_csv(path.join(path.dirname(__file__), 'static/Data/ethereum_price.csv'))
+    df = pd.read_csv(path.join(path.dirname(
+        ), 'static/Data/ethereum_price.csv'))
     raw_data_table3 = df.to_html(classes = 'table table-hover')
     return render_template(
         'ethereum.html',
@@ -127,7 +137,7 @@ def ethereum():
     )
 
 @app.route('/register', methods=['GET', 'POST'])
-def Register():
+def register():
     form = UserRegistrationFormStructure(request.form)
 
     if (request.method == 'POST' and form.validate()):
@@ -142,6 +152,7 @@ def Register():
             form = UserRegistrationFormStructure(request.form)
 
     return render_template(
+
         'register.html', 
         form=form, 
         title='Register New User',
@@ -156,7 +167,7 @@ def Login():
     if (request.method == 'POST' and form.validate()):
         if (db_Functions.IsLoginGood(form.username.data, form.password.data)):
             flash('Login approved!')
-            return redirect('<were to go if login is good!')
+            return redirect('index.html')
         else:
             flash('Error in - Username and/or password')
    

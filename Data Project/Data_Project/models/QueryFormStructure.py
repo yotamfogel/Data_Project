@@ -15,17 +15,17 @@ class QueryFormStructure(FlaskForm):
 
 
 class LoginFormStructure(FlaskForm):
-    username   = StringField('User name:  ' , validators = [DataRequired()])
-    password   = PasswordField('Pass word:  ' , validators = [DataRequired()])
+    username   = StringField('Username:  ' , validators = [DataRequired()])
+    password   = PasswordField('Password:  ' , validators = [DataRequired()])
     submit = SubmitField('Submit')
 
 class UserRegistrationFormStructure(FlaskForm):
-    FirstName  = StringField('First name:  ' , validators = [DataRequired()])
-    LastName   = StringField('Last name:  ' , validators = [DataRequired()])
-    PhoneNum   = StringField('Phone number:  ' , validators = [DataRequired()])
+    FirstName  = StringField('First Name:  ' , validators = [DataRequired()])
+    LastName   = StringField('Last Name:  ' , validators = [DataRequired()])
+    PhoneNum   = StringField('Phone Number:  ' , validators = [DataRequired()])
     EmailAddr  = StringField('E-Mail:  ' , validators = [DataRequired()])
-    username   = StringField('User name:  ' , validators = [DataRequired()])
-    password   = PasswordField('Pass word:  ' , validators = [DataRequired()])
+    username   = StringField('Username:  ' , validators = [DataRequired()])
+    password   = PasswordField('Password:  ' , validators = [DataRequired()])
     submit = SubmitField('Submit')
 
 

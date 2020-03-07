@@ -18,6 +18,9 @@
 <body>
     <h2><u>{{ title }}</u></h2>
     <h3>{{ message }}</h3>
+    <strong>This dataset shows the full market details of the cryptocurrency ripple between the years 2013-2018</strong>
+    <br />
+
     <table bgcolor="#00FF00">
         <tr>
             <th>Category</th>
@@ -57,7 +60,6 @@
     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
         Data
     </button>
-    </p>
     <div class="collapse" id="collapseExample">
         <div class="card card-body">
             {{ data_table2 | safe }}
