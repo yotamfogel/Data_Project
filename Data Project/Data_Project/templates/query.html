@@ -1,0 +1,15 @@
+﻿{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+<div class="col-md-2">
+    <form method="post">
+        {{ form1.csrf_token }}
+        {{ wtf.form_field(form1.cryptocurrency)}}
+        {{ wtf.form_field(form1.start_date)}}
+        {{ wtf.form_field(form1.end_date)}}
+        {{ wtf.form_field(form1.kind)}}
+        <input class="btn btn-primary" type="submit" value="הצג">
+    </form>
+</div>
+{% endblock %}

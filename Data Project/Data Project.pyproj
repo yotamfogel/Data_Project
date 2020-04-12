@@ -18,7 +18,7 @@
     <Name>Data Project</Name>
     <RootNamespace>Data Project</RootNamespace>
     <SuppressEnvironmentCreationPrompt>True</SuppressEnvironmentCreationPrompt>
-    <InterpreterId>MSBuild|env8|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|env2|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +30,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Data_Project\models\LocalDatabaseRoutines.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data_Project\models\Forms.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data_Project\models\plot_service_functions.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Data_Project\models\QueryFormStructure.py">
@@ -64,6 +70,8 @@
     <Content Include="Data_Project\templates\ripple.html" />
     <Content Include="Data_Project\templates\register.html" />
     <Content Include="Data_Project\templates\Login.html" />
+    <Content Include="Data_Project\templates\query.html" />
+    <Content Include="Data_Project\templates\WebPage1.html" />
     <Content Include="requirements.txt" />
     <Content Include="Data_Project\static\content\bootstrap.css" />
     <Content Include="Data_Project\static\content\bootstrap.min.css" />
@@ -93,6 +101,15 @@
     <Content Include="Data_Project\templates\layout.html" />
   </ItemGroup>
   <ItemGroup>
+    <Interpreter Include="env2\">
+      <Id>env2</Id>
+      <Version>3.6</Version>
+      <Description>env2 (Python 3.6 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
     <Interpreter Include="env8\">
       <Id>env8</Id>
       <Version>3.6</Version>

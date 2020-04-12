@@ -7,7 +7,7 @@ from flask import render_template
 from Data_Project import app
 from Data_Project.models.LocalDatabaseRoutines import create_LocalDatabaseServiceRoutines
 
-from flask import render_template, redirect, request
+from flask import render_template, request
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -26,9 +26,8 @@ import base64
 from os import path
 
 
-
-
-
+from Data_Project.models.Forms import CryptoForm
+from Data_Project.models.Forms import AllOfTheAboveForm
 
 
 from flask   import Flask, render_template, flash, request
@@ -161,20 +160,57 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def Login():
     form = LoginFormStructure(request.form)
-
     if (request.method == 'POST' and form.validate()):
         if (db_Functions.IsLoginGood(form.username.data, form.password.data)):
             flash('Login approved!')
-            return redirect('index.html')
+            return redirect('')
         else:
             flash('Error in - Username and/or password')
    
     return render_template(
         'login.html', 
         form=form, 
-        title='Login to data analysis', 
+        title='Login As Existing User',
         year=datetime.now().year,
         repository_name='Pandas',
+    )
+
+@app.route('/query' , methods = ['GET' , 'POST'])
+def query():
+
+    print("Query")
+
+    form1 = CryptoForm()
+    chart = {}
+    height_case_1 = "100"
+    width_case_1 = "400"
+
+    df_ripple = pd.read_csv(path.join(path.dirname(__file__), 'static/Data/ripple_price.csv'))
+    df_ethereum = pd.read_csv(path.join(path.dirname(__file__), 'static/Data/ethereum_price.csv'))
+    df_bitcoin = pd.read_csv(path.join(path.dirname(__file__), 'static/Data/bitcoin_price.csv'))
+    crypto_dict = {'bitcoin' : df_bitcoin , 'ripple' : df_ripple , 'ethereum' : df_ethereum}
+
+    if request.method == 'POST':
+        cryptocurrency = form1.cryptocurrency.data 
+        start_date = form1.start_date.data
+        end_date = form1.end_date.data
+        kind = form1.kind.data
+        height_case_1 = "300"
+        width_case_1 = "750"
+
+        print(cryptocurrency)
+        print(start_date)
+        print(end_date)
+        print(type(start_date))
+        x = str(start_date)
+        print(x)
+
+    return render_template(
+        'query.html',
+        form1 = form1,
+        src_case_1 = chart,
+        height_case_1 = height_case_1 ,
+        width_case_1 = width_case_1 
         )
 
 
