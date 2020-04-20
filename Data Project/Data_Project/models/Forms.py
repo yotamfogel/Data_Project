@@ -13,7 +13,8 @@ from wtforms.validators import InputRequired
 
 
 class CryptoForm(FlaskForm):
-    cryptocurrency = SelectMultipleField('Cryptocurrency' , validators = [DataRequired] , choices=[('bitcoin', 'Bitcoin'), ('ethereum', 'Ethereum'), ('ripple', 'Ripple')])
+    cryptocurrency1 = SelectField('Cryptocurrency 1' , validators = [DataRequired] , choices=[('Bitcoin', 'Bitcoin'), ('Ethereum', 'Ethereum'), ('Ripple', 'Ripple')])
+    cryptocurrency2 = SelectField('Cryptocurrency 2' , validators = [DataRequired] , choices=[('Bitcoin', 'Bitcoin'), ('Ethereum', 'Ethereum'), ('Ripple', 'Ripple'), ('None', 'None')])
     start_date = DateField('Start Date' , format='%Y-%m-%d' , validators = [DataRequired])
     end_date = DateField('End Date' , format='%Y-%m-%d' , validators = [DataRequired])
     kind = SelectField('Chart Kind' , validators = [DataRequired] , choices=[('Line', 'Line'), ('Bar', 'Bar')])

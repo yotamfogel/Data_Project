@@ -7,6 +7,10 @@ from flask import render_template
 from Data_Project import app
 from Data_Project.models.LocalDatabaseRoutines import create_LocalDatabaseServiceRoutines
 
+import base64
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
+
 from flask import render_template, request
 
 from flask_wtf import FlaskForm
@@ -28,6 +32,10 @@ from os import path
 
 from Data_Project.models.Forms import CryptoForm
 from Data_Project.models.Forms import AllOfTheAboveForm
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 
 from flask   import Flask, render_template, flash, request
@@ -181,37 +189,101 @@ def query():
     print("Query")
 
     form1 = CryptoForm()
-    chart = {}
+    chart = 'static/imgs/bitcoin.jpg'
     height_case_1 = "100"
     width_case_1 = "400"
 
-    df_ripple = pd.read_csv(path.join(path.dirname(__file__), 'static/Data/ripple_price.csv'))
-    df_ethereum = pd.read_csv(path.join(path.dirname(__file__), 'static/Data/ethereum_price.csv'))
-    df_bitcoin = pd.read_csv(path.join(path.dirname(__file__), 'static/Data/bitcoin_price.csv'))
-    crypto_dict = {'bitcoin' : df_bitcoin , 'ripple' : df_ripple , 'ethereum' : df_ethereum}
+    dfBC = pd.read_csv(path.join(path.dirname(__file__), 'static/Data/bitcoin_price.csv'))
+    dfRP = pd.read_csv(path.join(path.dirname(__file__), 'static/Data/ripple_price.csv'))
+    dfET = pd.read_csv(path.join(path.dirname(__file__), 'static/Data/ethereum_price.csv'))
+    crypto_dict = {'Bitcoin' : dfBC , 'Ripple' : dfRP , 'Ethereum' : dfET}
 
     if request.method == 'POST':
-        cryptocurrency = form1.cryptocurrency.data 
+        cryptocurrency1 = form1.cryptocurrency1.data 
+        cryptocurrency2 = form1.cryptocurrency2.data
         start_date = form1.start_date.data
         end_date = form1.end_date.data
         kind = form1.kind.data
         height_case_1 = "300"
         width_case_1 = "750"
 
-        print(cryptocurrency)
+        print(cryptocurrency1)
+        print(cryptocurrency2)
         print(start_date)
         print(end_date)
         print(type(start_date))
         x = str(start_date)
         print(x)
 
+        
+
+        dfBC = dfBC[['Date', 'Close']]
+        dfRP = dfRP[['Date', 'Close']]
+        dfET = dfET[['Date', 'Close']]
+
+        dfBC = dfBC.set_index('Date')
+        dfRP = dfRP.set_index('Date')
+        dfET = dfET.set_index('Date')
+
+        dfBC.index = pd.to_datetime(dfBC.index)
+        dfRP.index = pd.to_datetime(dfRP.index)
+        dfET.index = pd.to_datetime(dfET.index)
+
+        dfBC = dfBC[::-1]
+        dfRP = dfRP[::-1]
+        dfET = dfET[::-1]
+
+
+        dfBC = dfBC[start_date:end_date]
+        dfRP = dfRP[start_date:end_date]
+        dfET = dfET[start_date:end_date]
+
+        fig1 = plt.figure()
+        axx = fig1.add_subplot(111)
+        fig1.subplots_adjust(bottom=0.22)
+        if cryptocurrency1 == 'Bitcoin':
+            dfBC["Close"].plot(legend = True, ax = axx)
+
+        if cryptocurrency1 == 'Ripple':
+            dfRP["Close"].plot(legend = True, ax = axx)
+
+        if cryptocurrency1 == 'Ethereum':
+            dfET["Close"].plot(legend = True, ax = axx)
+        
+        if cryptocurrency2 == 'Bitcoin':
+            dfBC["Close"].plot(secondary_y = True, legend = True, ax = axx)
+
+        if cryptocurrency2 == 'Ripple':
+            dfRP["Close"].plot(secondary_y = True, legend = True, ax = axx)
+
+        if cryptocurrency2 == 'Ethereum':
+            dfET["Close"].plot(secondary_y = True, legend = True, ax = axx)
+            
+        if cryptocurrency2 != 'None':
+            axx.right_ax.set_ylabel(cryptocurrency2)
+                 
+
+        
+
+        axx.set_ylabel(cryptocurrency1)
+        
+
+        chart=plt_to_img(fig1)
+        
+
     return render_template(
         'query.html',
         form1 = form1,
-        src_case_1 = chart,
+        chart = chart,
         height_case_1 = height_case_1 ,
         width_case_1 = width_case_1 
         )
+def plt_to_img(fig):
+    pngImage = io.BytesIO()
+    FigureCanvas(fig).print_png(pngImage)
+    pngImageB64String = "data:image/png;base64,"
+    pngImageB64String += base64.b64encode(pngImage.getvalue()).decode('utf8')
+    return pngImageB64String
 
 
 
