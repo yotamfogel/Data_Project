@@ -223,7 +223,6 @@ def query():
         fig1.subplots_adjust(bottom=0.22) # Changes the size of the "box" the graph is in
         if cryptocurrency1 == 'Bitcoin':
             dfBC["Close"].plot(legend = True, ax = axx) # If the chosen cryptocurrency1 is bitcoin, create a plot from dfBC with the bitcoin data
-            
 
         if cryptocurrency1 == 'Ripple':
             dfRP["Close"].plot(legend = True, ax = axx) # If the chosen cryptocurrency1 is ripple, create a plot from dfRP with the ripple data
@@ -239,15 +238,6 @@ def query():
 
         if cryptocurrency2 == 'Ethereum':
             dfET["Close"].plot(secondary_y = True, legend = True, ax = axx) # If the chosen cryptocurrency2 is ethereum, create a second y axis and set it to ethereum with data from dfET
-            
-        if cryptocurrency1 == cryptocurrency2 == 'Bitcoin':
-            dfBC["Close"].plot(legend = True, ax = axx) # If the chosen cryptocurrencies are the same, don't create a second y axis and don't add another line to the legend
-
-        if cryptocurrency1 == cryptocurrency2 == 'Ethereum':
-            dfET["Close"].plot(legend = True, ax = axx) # If the chosen cryptocurrencies are the same, don't create a second y axis and don't add another line to the legend
-
-        if cryptocurrency1 == cryptocurrency2 == 'Ripple':
-            dfRP["Close"].plot(legend = True, ax = axx) # If the chosen cryptocurrencies are the same, don't create a second y axis and don't add another line to the legend
 
         if cryptocurrency2 != 'None':
             axx.right_ax.set_ylabel(cryptocurrency2) # If the chosen cryptocurrency2 isn't none, create a second y axis for the second cryptocurrency. Without this line it will create a y axis and put the word none on it.
