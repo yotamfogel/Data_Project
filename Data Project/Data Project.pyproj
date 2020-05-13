@@ -18,7 +18,7 @@
     <Name>Data Project</Name>
     <RootNamespace>Data Project</RootNamespace>
     <SuppressEnvironmentCreationPrompt>True</SuppressEnvironmentCreationPrompt>
-    <InterpreterId>MSBuild|env2|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|env6|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -101,19 +101,10 @@
     <Content Include="Data_Project\templates\layout.html" />
   </ItemGroup>
   <ItemGroup>
-    <Interpreter Include="env2\">
-      <Id>env2</Id>
+    <Interpreter Include="env6\">
+      <Id>env6</Id>
       <Version>3.6</Version>
-      <Description>env2 (Python 3.6 (64-bit))</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>X64</Architecture>
-    </Interpreter>
-    <Interpreter Include="env8\">
-      <Id>env8</Id>
-      <Version>3.6</Version>
-      <Description>env8 (Python 3.6 (64-bit))</Description>
+      <Description>env6 (Python 3.6 (64-bit))</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
       <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>

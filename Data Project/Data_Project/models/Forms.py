@@ -13,26 +13,12 @@ from wtforms.validators import InputRequired
 
 
 class CryptoForm(FlaskForm):
-    cryptocurrency1 = SelectField('Cryptocurrency 1' , validators = [DataRequired] , choices=[('Bitcoin', 'Bitcoin'), ('Ethereum', 'Ethereum'), ('Ripple', 'Ripple')])
-    cryptocurrency2 = SelectField('Cryptocurrency 2' , validators = [DataRequired] , choices=[('Bitcoin', 'Bitcoin'), ('Ethereum', 'Ethereum'), ('Ripple', 'Ripple'), ('None', 'None')])
-    start_date = DateField('Start Date' , format='%Y-%m-%d' , validators = [DataRequired])
-    end_date = DateField('End Date' , format='%Y-%m-%d' , validators = [DataRequired])
-    kind = SelectField('Chart Kind' , validators = [DataRequired] , choices=[('Line', 'Line'), ('Bar', 'Bar')])
-    subnmit = SubmitField('Display')
-
-
-class AllOfTheAboveForm(FlaskForm):
-    string_field_entry = StringField('Enter a String:' , validators = [DataRequired])
-    text_area_field_entry = TextAreaField('Enter Text:' , validators = [DataRequired])
-    password_field_entry = PasswordField('Enter Password:' , validators = [DataRequired])
-    date_field_entry = DateField('Enter Date:' , format='%Y-%m-%d' , validators = [DataRequired])
-    integer_field_entry = IntegerField('Enter an Integer:' , validators = [DataRequired])
-    decimal_field_entry = DecimalField('Enter a Decimal:' , validators = [DataRequired])
-    boolean_field_entry = BooleanField('Enter a Boolean:' , validators = [DataRequired])
-    radio_field_entry = RadioField('Choose one of:' , validators = [DataRequired] , choices=[('1', 'A'), ('2', 'B'), ('3', 'C') , ('4', 'D')])
-    select_field_entry = SelectField('Select:' , validators = [DataRequired] , choices=[('trump', 'Trump'), ('obama', 'Obama'), ('bush', 'Bush') , ('clinton', 'Clinton')])
-    select_field_multiple_entry = SelectMultipleField('Select Multiple:' , validators = [DataRequired] , choices=[('trump', 'Trump'), ('obama', 'Obama'), ('bush', 'Bush') , ('clinton', 'Clinton')])
-    subnmit = SubmitField('submit')
+    cryptocurrency1 = SelectField('Cryptocurrency 1' , validators = [DataRequired()] , choices=[('Bitcoin', 'Bitcoin'), ('Ethereum', 'Ethereum'), ('Ripple', 'Ripple')]) # Makes a new input field on the query page with a predetermined selection
+    cryptocurrency2 = SelectField('Cryptocurrency 2' , validators = [DataRequired()] , choices=[('Bitcoin', 'Bitcoin'), ('Ethereum', 'Ethereum'), ('Ripple', 'Ripple'), ('None', 'None')]) # Makes a new input field on the query page with a predetermined selection
+    start_date = DateField('Start Date' , format='%Y-%m-%d' , validators = [DataRequired()]) # Makes a new input field on the query page with a limited date range to pick from, this will be our start date
+    end_date = DateField('End Date' , format='%Y-%m-%d' , validators = [DataRequired()]) # Makes a new input field on the query page with a limited date range to pick from, this will be our end date
+    kind = SelectField('Chart Kind' , validators = [DataRequired()] , choices=[('Line', 'Line'), ('Bar', 'Bar')]) # Delete this it's useless
+    subnmit = SubmitField('Display') # Sumbit button
 
 
 

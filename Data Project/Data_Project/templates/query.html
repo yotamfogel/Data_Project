@@ -2,23 +2,26 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block content %}
-<div class="row">
-    <form method="post">
-        {{ form1.csrf_token }}
-        {{ wtf.form_field(form1.cryptocurrency1)}}
-        {{ wtf.form_field(form1.cryptocurrency2)}}
-        {{ wtf.form_field(form1.start_date)}}
-        {{ wtf.form_field(form1.end_date)}}
-        {{ wtf.form_field(form1.kind)}}
-        <input class="btn btn-primary" type="submit" value="הצג">
+    <body style ="background-image: {{backgroundimg}}";>
+
+        <div class="row">
+            <form method="post">
+                {{ form1.csrf_token }}
+                {{ wtf.form_field(form1.cryptocurrency1)}}
+                {{ wtf.form_field(form1.cryptocurrency2)}}
+                {{ wtf.form_field(form1.start_date)}}
+                {{ wtf.form_field(form1.end_date)}}
+                {{ wtf.form_field(form1.kind)}}
+                <input class="btn btn-primary" type="submit" value="הצג">
 
 
 
 
-    </form>
-</div>
-<div class="row">
-    <img src={{ chart }} class="img-thumbnail" alt="not found">
-
-</div>
-{% endblock %}
+            </form>
+        </div>
+        <div class="row">
+            <img src={{ chart }} class="img-thumbnail" alt="not found">
+            
+        </div>
+    </body>
+        {% endblock %}

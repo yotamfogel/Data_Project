@@ -23,7 +23,7 @@ class UserRegistrationFormStructure(FlaskForm):
     FirstName  = StringField('First Name:  ' , [validators.Length(min=1, max=10)])
     LastName   = StringField('Last Name:  ' , [validators.Length(min=1, max=25)])
     PhoneNum   = StringField('Phone Number:  ' , [validators.Length(min=9, max=10)])
-    EmailAddr  = StringField('E-Mail:  ' , [validators.Email()])
+    EmailAddr  = StringField('E-Mail:  ')
     username   = StringField('Username:  ' ,  [validators.Length(min=1, max=10)])
     password   = PasswordField('Password:  ' , validators = [DataRequired()])
     submit = SubmitField('Submit')
